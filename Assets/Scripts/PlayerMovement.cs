@@ -41,13 +41,13 @@ public class PlayerMovement : MonoBehaviour {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 //go left
-                transform.localScale = new Vector3(-2, 2, 1);
+                transform.localScale = new Vector3(-1, 1, 1);
                 transform.position += new Vector3 (-speed, 0.0f, 0.0f);
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
                 //go right
-                transform.localScale = new Vector3(2, 2, 1);
+                transform.localScale = new Vector3(1, 1, 1);
                 transform.position += new Vector3 (speed, 0.0f, 0.0f) ;
             }
 

@@ -9,13 +9,14 @@ public class PlayerStats : MonoBehaviour {
     public int firePower;
     public int waterPower;
     public int grassPower;
+    public int magicPower;
 
     public int health = 100;
 
     // Use this for initialization
     void Start () {
-        speed = 0.15f;
-        maxSpeed = 1.0f;
+        speed = 0.05f;
+        maxSpeed = 1.0f; //not in use 
 
     }
 
