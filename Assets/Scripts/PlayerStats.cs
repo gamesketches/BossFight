@@ -15,13 +15,13 @@ public class PlayerStats : MonoBehaviour {
 
     public enum facingDir {right, down, left, up};
 
-    public facingDir currentDir = facingDir.right;
+    public facingDir currentDir;
 
     // Use this for initialization
     void Start () {
         speed = 0.05f;
         maxSpeed = 1.0f; //not in use 
-
+        currentDir = facingDir.right;
     }
 
     // Update is called once per frame

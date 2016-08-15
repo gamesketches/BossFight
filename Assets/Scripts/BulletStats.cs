@@ -10,7 +10,8 @@ public class BulletStats : MonoBehaviour {
     public enum Dir { right, down, left, up };
     public Dir dir;
 
-
+    public float lifetime = 0;
+    public int shotIndex = 0; //using for water shot
 
     // Use this for initialization
     void Start () {
