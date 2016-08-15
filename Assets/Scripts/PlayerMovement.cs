@@ -51,8 +51,7 @@ public class PlayerMovement : MonoBehaviour {
                 transform.position += new Vector3 (speed, 0.0f, 0.0f) ;
             }
 
-            //jump
-            if (Input.GetKey(KeyCode.UpArrow))
+            else if (Input.GetKey(KeyCode.UpArrow))
             {
                 //transform.localScale = new Vector3(-1, 1, 1);
                 transform.position += new Vector3(0.0f, speed, 0.0f);
