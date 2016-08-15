@@ -13,6 +13,10 @@ public class PlayerStats : MonoBehaviour {
 
     public int health = 100;
 
+    public enum facingDir {right, down, left, up};
+
+    public facingDir currentDir = facingDir.right;
+
     // Use this for initialization
     void Start () {
         speed = 0.05f;

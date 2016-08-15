@@ -43,23 +43,27 @@ public class PlayerMovement : MonoBehaviour {
                 //go left
                 transform.localScale = new Vector3(-1, 1, 1);
                 transform.position += new Vector3 (-speed, 0.0f, 0.0f);
+                playerStats.currentDir = PlayerStats.facingDir.left;
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
                 //go right
                 transform.localScale = new Vector3(1, 1, 1);
                 transform.position += new Vector3 (speed, 0.0f, 0.0f) ;
+                playerStats.currentDir = PlayerStats.facingDir.right;
             }
 
             else if (Input.GetKey(KeyCode.UpArrow))
             {
                 //transform.localScale = new Vector3(-1, 1, 1);
                 transform.position += new Vector3(0.0f, speed, 0.0f);
+                playerStats.currentDir = PlayerStats.facingDir.up;
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
                 //transform.localScale = new Vector3(-1, 1, 1);
                 transform.position += new Vector3(0.0f, -speed, 0.0f);
+                playerStats.currentDir = PlayerStats.facingDir.down;
             }
 
             //limit the velocity if it's too high or too low
