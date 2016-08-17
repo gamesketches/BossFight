@@ -7,10 +7,15 @@ public class BulletBehavior : MonoBehaviour {
     BulletStats bulletStats;
     float fireSpeed = 0.075f;
     float waterSpeed = 0.05f;
-    float grassGrow = 0.1f;
-    int growthRate = 1;
+
+    float grassGrow = 0.3f; //percent chance grass grows per interval
+    float growthRate = 0.5f; //size of growth interval in seconds
+    float growthRand = Random.RandomRange(0, 1.0f); // random chance
+
     float birthTime = Time.time;
     int maxGrass = 5;
+    float interval = 0;
+    int intervalCount = 0;
 
     public GameObject basicBulletPrefab;
     public float inheritedBirth = -1;
@@ -21,7 +26,7 @@ public class BulletBehavior : MonoBehaviour {
         bulletStats = GetComponent<BulletStats>();
         if(inheritedBirth > 0)
         {
-            birthTime = inheritedBirth;
+            //birthTime = inheritedBirth;
         }
 //        birthTime = Time.time;
         
@@ -31,8 +36,9 @@ public class BulletBehavior : MonoBehaviour {
 	void Update () {
 
 
-        if (bulletStats.lifetime <= Time.time - birthTime)
+        if (bulletStats.lifetime <= Time.time - birthTime || bulletStats.lifetime <= 0 )
             Destroy(gameObject);
+        
         //Debug.Log("lifetime = " + (bulletStats.lifetime  - ( Time.time - birthTime)));
 
         switch (bulletStats.type)
@@ -168,29 +174,34 @@ public class BulletBehavior : MonoBehaviour {
 
     void grassShot(BulletStats blstats) //grow grass
     {
-        float growChance;
 
-        growChance = Random.RandomRange(0, 1.0f);
-
+        interval = Time.time - birthTime;
         //if ((Time.time - startTime >= growthRate))
-            Debug.Log("checking for growth : " + (Time.time - birthTime));
-        if ((Time.time - birthTime >= growthRate) && growChance <= grassGrow && blstats.shotIndex + 1 < maxGrass)
+            //Debug.Log("checking for growth : " + (Time.time - birthTime));
+        if ((interval >= growthRate))
         {
-            GameObject bullet = null;
-            BulletStats bulletStats;
+            //Debug.Log("interval 1: IntervaL = " + interval + "GROWTHRATE = " + growthRate );
+            //Debug.Log("interval 1: growthRand = " + growthRand + "grassGrow = " + grassGrow + "count = " + intervalCount);
+            if ((growthRand <= grassGrow) && (blstats.shotIndex + 1 < maxGrass))
+            {
+                GameObject bullet = null;
+                BulletStats bulletStats;
 
-            bullet = ((GameObject)Instantiate(basicBulletPrefab, transform.position + new Vector3(Random.Range(-1, 1) , Random.Range(-1, 1) , 0.0f),
-                Quaternion.Euler(0.0f, 0.0f, 0.0f)));
-            bulletStats = bullet.GetComponent<BulletStats>();
-            bullet.GetComponent<SpriteRenderer>().sprite = bullet.GetComponent<BulletStats>().BulletSprites[1];
-            bulletStats.type = BulletStats.BulletType.Grass;
-            //bulletStats.dir = (BulletStats.Dir)playerStats.currentDir; 
-            bulletStats.lifetime = (bulletStats.lifetime - (Time.time - birthTime));
-            bulletStats.shotIndex = blstats.shotIndex + 1;
-            bullet.GetComponent<BulletBehavior>().inheritedBirth = birthTime;   
-            
-            Debug.Log("shot index = " + blstats.shotIndex);
-            growChance = 0; //stop this grass from producing moer
+                bullet = ((GameObject)Instantiate(basicBulletPrefab, transform.position + new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0.0f),
+                    Quaternion.Euler(0.0f, 0.0f, 0.0f)));
+                bulletStats = bullet.GetComponent<BulletStats>();
+                bullet.GetComponent<SpriteRenderer>().sprite = bullet.GetComponent<BulletStats>().BulletSprites[1];
+                bulletStats.type = BulletStats.BulletType.Grass;
+                //bulletStats.dir = (BulletStats.Dir)playerStats.currentDir; 
+                bulletStats.lifetime = (blstats.lifetime - (Time.time - birthTime));
+                bulletStats.shotIndex = blstats.shotIndex + 1;
+                bullet.GetComponent<BulletBehavior>().inheritedBirth = birthTime;
+
+                Debug.Log("shot index = " + blstats.shotIndex);
+                growthRand = 1; //stop this grass from producing moer
+            }
+            interval = 0;
+            intervalCount++;
         }
     }
 
