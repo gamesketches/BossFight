@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	private PlayerStats playerStats;
 
+    public Sprite[] bossSprites;
+
 	void Awake() {
 		locked = false;
 	}
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 //go left
+                GetComponent<SpriteRenderer>().sprite = bossSprites[2];
                 transform.localScale = new Vector3(-1, 1, 1);
                 transform.position += new Vector3 (-speed, 0.0f, 0.0f);
                 playerStats.currentDir = PlayerStats.facingDir.left;
@@ -48,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
             else if (Input.GetKey(KeyCode.RightArrow))
             {
                 //go right
+                GetComponent<SpriteRenderer>().sprite = bossSprites[2];
                 transform.localScale = new Vector3(1, 1, 1);
                 transform.position += new Vector3 (speed, 0.0f, 0.0f) ;
                 playerStats.currentDir = PlayerStats.facingDir.right;
@@ -56,12 +60,14 @@ public class PlayerMovement : MonoBehaviour {
             else if (Input.GetKey(KeyCode.UpArrow))
             {
                 //transform.localScale = new Vector3(-1, 1, 1);
+                GetComponent<SpriteRenderer>().sprite = bossSprites[0];
                 transform.position += new Vector3(0.0f, speed, 0.0f);
                 playerStats.currentDir = PlayerStats.facingDir.up;
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
                 //transform.localScale = new Vector3(-1, 1, 1);
+                GetComponent<SpriteRenderer>().sprite = bossSprites[1];
                 transform.position += new Vector3(0.0f, -speed, 0.0f);
                 playerStats.currentDir = PlayerStats.facingDir.down;
             }
