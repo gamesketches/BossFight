@@ -49,4 +49,26 @@ public class BatBehavior : MonoBehaviour {
         }
         interval = Time.time - startTime;
     }
+
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Bullet")
+        {
+            Debug.Log("Hit! die");
+        }
+        else if (coll.gameObject.tag == "Player")
+        {
+            Debug.Log("fuckem");
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Bullet")
+        {
+            Debug.Log("Hit! die");
+        }
+    }
+
 }
