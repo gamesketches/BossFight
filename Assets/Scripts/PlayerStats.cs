@@ -19,7 +19,7 @@ public class PlayerStats : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        speed = 0.05f;
+        speed = 0.25f;
         maxSpeed = 1.0f; //not in use 
         currentDir = facingDir.right;
     }

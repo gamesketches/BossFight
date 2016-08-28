@@ -55,7 +55,8 @@ public class BatBehavior : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Bullet")
         {
-            Debug.Log("Hit! die");
+            //Debug.Log("Hit! die");
+            Destroy(gameObject);
         }
         else if (coll.gameObject.tag == "Player")
         {
